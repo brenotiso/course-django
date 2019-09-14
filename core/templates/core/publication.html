@@ -1,0 +1,34 @@
+{% extends 'core/base.html'%}
+
+{% block titulo%}
+Publicação
+{% endblock %}
+
+{% block content %}
+<h1>{{ publication.title }}<h1>
+<h2>{{ publication.subtitle }}<h2>
+Publicado por {{ publication.author }} em {{ publication.date }}
+<hr>
+{{ publication.text | safe}}
+<hr>
+<h3>Comentários</h3>
+{% for c in comments %}
+    {{ c.user.username }} escreveu em {{ c.date }}:
+    <br>
+    {{ c.comment }}
+    <hr>
+{% endfor %}
+
+{% if user.is_authenticated %}
+<hr>
+<form method="POST" action="{% url 'comment_on_publication' publication.id %}">
+{% csrf_token %}
+<label>Comentário:</label>
+<br>
+{{ commet_form.comment }}
+<br>
+<button type="submit">Comentar</button>
+</form>
+
+{% endif %}
+{% endblock %}

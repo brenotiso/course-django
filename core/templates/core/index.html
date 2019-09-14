@@ -1,0 +1,15 @@
+{% extends 'core/base.html'%}
+
+{% block titulo%}
+Index
+{% endblock %}
+
+{% block content %}
+{% for p in publications%}
+    <h2><a href="{% url 'publication_detail' p.id %}">{{ p.title }}</a></h2>
+    <p>{{ p.subtitle }}</p>
+    <br>
+    Publicado por {{ p.author }} em {{ p.date }} - {{ p.comments.count }} comentários
+    <hr>
+{% endfor %}
+{% endblock %}

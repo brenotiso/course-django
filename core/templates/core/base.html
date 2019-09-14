@@ -1,0 +1,20 @@
+<h1>{% block titulo%}{% endblock %}</h1>
+<hr>
+<a href="{% url 'index' %}">Início</a>
+<br>
+<br>
+{% if user.is_authenticated %}
+Usuario logado - {{ user.username }}
+<br>
+<a href="{% url 'logout' %}">Logout</a>
+{% else %}
+Usuario não logado
+<br>
+<a href="{% url 'login' %}">Login</a>
+<br>
+<a href="{% url 'signup' %}">Cadastro</a>
+{% endif %}
+<hr>
+
+{% block content %}
+{% endblock %}
